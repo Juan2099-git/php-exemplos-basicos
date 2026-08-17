@@ -11,7 +11,7 @@ if($_SERVER['REQUEST_METHOD']=='POST') {
         header("Location: 4b_bem_vindo.php");
         exit();
     } else {
-        $erro = "Senha incorreta. tente novamente";
+        $erro = "Senha incorreta. Tente novamente";
     }
 }
 ?>
@@ -29,5 +29,15 @@ if($_SERVER['REQUEST_METHOD']=='POST') {
         <input type="password" name="senha" required><br>
         <button type="submit">Entrar</button>
     </form>
+
+    <?php
+    // Exibe a mensagem de erro
+    if (isset($erro)) {
+        echo "<p style='color: red';>$erro</p>";
+    }
+
+    ?>
+
+
 </body>
 </html>
