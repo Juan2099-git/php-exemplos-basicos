@@ -1,9 +1,29 @@
 <?php
 
-// Vetor (array simples - "1 linha")
-$notas = ["Dean", "Sam", "Castiel", "Amy", "Ellen"];
+$notas = [10, 7, 8, 5, 6];
 
-// Exibindo os valores com laço
-foreach ($notas as $indice => $notas) {
-    echo "Aluno $indice: $notas <br>";
+$soma = 0;
+$totalAlunos = count($notas);
+
+$maiorNota = $notas[0];
+$menorNota = $notas[0];
+
+foreach ($notas as $nota) {
+    $soma += $nota;
+
+    if ($nota > $maiorNota) {
+        $maiorNota = $nota;
+    }
+
+    if ($nota < $menorNota) {
+        $menorNota = $nota;
+    }
 }
+
+
+$media = $soma / $nota;
+
+
+echo "Média da turma:" . number_format($media, 2, ',', '.') . "<br>";
+echo "Maior nota:" . number_format($maiorNota, 2, ',', '.') . "<br>";
+echo "Menor nota:" . number_format($menorNota, 2, ',', '.') . "<br>";
