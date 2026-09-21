@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Verificador de Maioridade</title>
 </head>
 <body>
     
@@ -13,16 +13,18 @@ if ($_POST) {
     $idade = date('Y') - $_POST['ano'];
 
     if ($idade >= 18) {
-        echo "Acesso permitido";
+        echo "<p>Acesso permitido, $nome! sua idade é: $idade </p>";
         file_put_contents('log_acessos.txt', "$nome - $idade anos\n", FILE_APPEND);
     } else {
-        echo "Acesso negado";
+        echo "<p>Acesso negado, $nome! sua idade é: $idade";
     }
 }
 ?>
 
 <form method="POST">
+<label for="nome">Nome:</label>
 <input type="text" name="nome" required>
+<label for="ano">Ano de nascimento:</label>
 <input type="number" name="ano" required>
 <button type="submit">Cadastrar</button>
 
