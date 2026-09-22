@@ -2,32 +2,48 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verificador de Maioridade</title>
 </head>
 <body>
-    
-<?php
-if ($_POST) {
-    $nome = $_POST['nome'];
-    $idade = date('Y') - $_POST['ano'];
+    <form method="post" action="">
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required><br>
 
-    if ($idade >= 18) {
-        echo "<p>Acesso permitido, $nome! sua idade é: $idade </p>";
-        file_put_contents('log_acessos.txt', "$nome - $idade anos\n", FILE_APPEND);
-    } else {
-        echo "<p>Acesso negado, $nome! sua idade é: $idade";
+        <label for="ano_nascimento">Ano de Nascimento:</label>
+        <input type="number" name="ano_nascimento" placeholder="AAAA" required><br>
+
+        <button type="submit">Verificar</button>
+    </form>
+
+  <?php
+    // Verifica se o formulário foi enviado com o método POST
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        // Recebe e armazena os dados do formulário
+        $nome = $_POST['nome'];
+        $ano_nascimento = (int)$_POST['ano_nascimento'];
+
+        // Calcula a idade subtraindo o ano de nascimento do ano atual
+        $idade = date('Y') - $ano_nascimento;
+
+        // Verifica se a idade é maior ou igual a 18
+        if ($idade >= 18) {
+            echo "<h2>Acesso permitido, $nome! Idade atual: $idade.</h2>";
+
+            // Abre o arquivo log_acessos.txt no modo de adição ('a')
+            $arquivo = fopen('log_acessos.txt', 'a');
+            // Monta a linha a ser salva no arquivo
+            $linha = "Nome: $nome, Idade: $idade\n";
+            // Escreve a linha no arquivo e o fecha
+            fwrite($arquivo, $linha);
+            fclose($arquivo);
+        } else {
+            // Exibe mensagem de acesso negado se for menor de idade
+            echo "<h2>Acesso negado, $nome! Idade atual: $idade.</h2>";
+        }
+
+        // Executa o refresh da página após 5 segundos para limpar a mensagem
+        echo '<meta http-equiv="refresh" content="5;url='.$_SERVER['PHP_SELF'].'">';
     }
-}
-?>
-
-<form method="POST">
-<label for="nome">Nome:</label>
-<input type="text" name="nome" required>
-<label for="ano">Ano de nascimento:</label>
-<input type="number" name="ano" required>
-<button type="submit">Cadastrar</button>
-
-
+    ?>
 </body>
 </html>

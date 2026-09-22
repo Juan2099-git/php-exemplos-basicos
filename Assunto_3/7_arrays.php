@@ -11,11 +11,11 @@ $produtos = [
 echo "<table border='1'>";
 echo "<tr> <th>Nome</th> <th>Preço</th> <th>Quantidade</th> </tr>";
 
-// Laço dde repetição (foreach) para listar os produtos
+// Laço de repetição (foreach) para listar os produtos
 foreach ($produtos as $produto) {
     echo "<tr>";
     echo "<td>" . $produto['nome'] . "</td>";
-    echo "<td>R$" .number_format($produto['preco'], 2 , ',' , ',') . "</td>";
+    echo "<td>R$ " .number_format($produto['preco'], 2 , ',' , '.') . "</td>";
     echo "<td>" . $produto['quantidade'] . "</td>";
     echo "<tr>";
 }

@@ -2,25 +2,19 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login de usuário</title>
+    <title>Login de Usuário</title>
 </head>
 <body>
-
     <form method="post" action="">
-        <!-- Campo para nome -->
-         <label for="nome">Nome:</label>
-         <input type="text" name="nome" required>
+        <label for="nome">Nome:</label>
+        <input type="text" name="nome" required><br>
 
-        <!-- Campo para senha -->
         <label for="senha">Senha:</label>
-        <input type="password" name="senha" required>
+        <input type="password" name="senha" required><br>
 
-        <!-- Botão para envio -->
-         <button type="submit">Entrar</button>
+        <button type="submit">Entrar</button>
     </form>
 
-    <!-- Lógica em PHP -->
     <?php
     // Verifica se o formulário foi enviado
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -28,22 +22,23 @@
         $nome = $_POST['nome'];
         $senha = $_POST['senha'];
 
-        // Abre o arquivo usuários.txt para leitura "read - r"
+        // Abre o arquivo usuarios.txt para leitura
         $arquivo = fopen('../Assunto_3/usuarios.txt', 'r');
+        // $arquivo = fopen('usuarios.txt', 'r');
         $login_sucesso = false;
 
         // Lê cada linha do arquivo
-        while (($linha = fgets($arquivo)) !==false) {
-            // Divide a linha pelo delimitador "Neste caso o ;
+        while (($linha = fgets($arquivo)) !== false) {
+            // Divide a linha pelo delimitador ";"
             list($usuario_arquivo, $senha_arquivo) = explode(';', trim($linha));
 
-            // Verifica sed o nome e senha correspondem no arquivo "usuarios.txt"
+            // Verifica se o nome e a senha correspondem aos valores no arquivo
             if ($nome == $usuario_arquivo && $senha == $senha_arquivo) {
                 $login_sucesso = true;
                 break;
             }
         }
-    }
+
         // Fecha o arquivo
         fclose($arquivo);
 
@@ -53,7 +48,7 @@
         } else {
             echo "<p style='color: red;'>Usuário ou senha incorretos.</p>";
         }
-    
+    }
     ?>
 </body>
 </html>
