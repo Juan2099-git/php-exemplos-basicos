@@ -1,6 +1,5 @@
 <!-- Passar id via URL -->
-<!-- http://localhost/php-basicos/13_exclusao.php?id=5-->
-
+<!-- http://localhost/php-basicos/13_exclusao.php?id=2-->
 <?php
 // Conecta ao banco de dados
 $servername = "localhost";
@@ -25,7 +24,7 @@ if (isset($_GET['id'])) {
     if ($conn->query($sql) === TRUE) {
         echo "<p>Cliente excluído com sucesso!</p>";
     } else {
-        echo "<p>Erro ao excluir cliente.</p>";
+        echo "<p>Erro ao excluir cliente: " . $conn->error . "</p>";
     }
 }
 
